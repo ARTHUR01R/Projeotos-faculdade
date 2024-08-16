@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade Ponto Extra</title>
+</head>
+<body>
+    <h1>Atividade Ponto Extra</h1>
+
+    <h2>Maior ou Menor</h2>
+    <form onsubmit="return false;">
+        <label>Valor 1: <input type="text" id="valor1" required oninput="this.value=this.value.replace(/[^0-9]/g,'');"></label><br>
+        <label>Valor 2: <input type="text" id="valor2" required oninput="this.value=this.value.replace(/[^0-9]/g,'');"></label><br>
+        <label>Valor 3: <input type="text" id="valor3" required oninput="this.value=this.value.replace(/[^0-9]/g,'');"></label><br>
+        <label>Valor 4: <input type="text" id="valor4" required oninput="this.value=this.value.replace(/[^0-9]/g,'');"></label><br>
+        <label>Valor 5: <input type="text" id="valor5" required oninput="this.value=this.value.replace(/[^0-9]/g,'');"></label><br>
+        <button onclick="maiorMenor()">Calcular Maior e Menor</button>
+    </form>
+    <p id="maiorMenorResultado"></p>
+
+    <h2>Vogal</h2>
+    <form onsubmit="return false;">
+        <label>Caractere: <input type="text" id="caractere" maxlength="1" required></label><br>
+        <button onclick="vogal()">Verificar Vogal</button>
+    </form>
+    <p id="vogalResultado"></p>
+
+    <h2>Limites</h2>
+    <form onsubmit="return false;">
+        <label>Limite Inferior: <input type="text" id="limiteInferior" required oninput="this.value=this.value.replace(/[^0-9]/g,'');"></label><br>
+        <label>Limite Superior: <input type="text" id="limiteSuperior" required oninput="this.value=this.value.replace(/[^0-9]/g,'');"></label><br>
+        <button onclick="limites()">Calcular Pares e Somatório</button>
+    </form>
+    <p id="limitesResultado"></p>
+
+    <h2>Ordem</h2>
+    <form onsubmit="return false;">
+        <label>Valor 1: <input type="text" id="ordemValor1" required oninput="this.value=this.value.replace(/[^0-9]/g,'');"></label><br>
+        <label>Valor 2: <input type="text" id="ordemValor2" required oninput="this.value=this.value.replace(/[^0-9]/g,'');"></label><br>
+        <label>Valor 3: <input type="text" id="ordemValor3" required oninput="this.value=this.value.replace(/[^0-9]/g,'');"></label><br>
+        <button onclick="ordem()">Ordenar Valores</button>
+    </form>
+    <p id="ordemResultado"></p>
+
+    <h2>Positivo e Negativo</h2>
+    <form onsubmit="return false;">
+        <label>Valor: <input type="text" id="valorPosNeg" required oninput="this.value=this.value.replace(/[^0-9]/g,'');"></label><br>
+        <button onclick="positivoNegativo()">Verificar Positivo ou Negativo</button>
+    </form>
+    <p id="positivoNegativoResultado"></p>
+
+    <h2>Par ou Impar</h2>
+    <form onsubmit="return false;">
+        <label>Valor: <input type="text" id="valorParImpar" required oninput="this.value=this.value.replace(/[^0-9]/g,'');"></label><br>
+        <button onclick="parImpar()">Verificar Par ou Ímpar</button>
+    </form>
+    <p id="parImparResultado"></p>
+
+    <script>
+        function maiorMenor() {
+            const valores = [
+                parseInt(document.getElementById('valor1').value),
+                parseInt(document.getElementById('valor2').value),
+                parseInt(document.getElementById('valor3').value),
+                parseInt(document.getElementById('valor4').value),
+                parseInt(document.getElementById('valor5').value)
+            ];
+            const maior = Math.max(...valores);
+            const menor = Math.min(...valores);
+            document.getElementById('maiorMenorResultado').innerText = `Maior: ${maior}, Menor: ${menor}`;
+        }
+
+        function vogal() {
+            const c = document.getElementById('caractere').value.toLowerCase();
+            const vogais = ['a', 'e', 'i', 'o', 'u'];
+            const resultado = vogais.includes(c) ? 1 : 0;
+            document.getElementById('vogalResultado').innerText = `É vogal? ${resultado}`;
+        }
+
+        function limites() {
+            const li = parseInt(document.getElementById('limiteInferior').value);
+            const ls = parseInt(document.getElementById('limiteSuperior').value);
+            let soma = 0;
+            let pares = [];
+
+            for (let i = li + 1; i < ls; i++) {
+                if (i % 2 === 0) {
+                    pares.push(i);
+                    soma += i;
+                }
+            }
+
+            document.getElementById('limitesResultado').innerText = `Números Pares: ${pares.join(', ')}, Somatório: ${soma}`;
+        }
+
+        function ordem() {
+            const valores = [
+                parseInt(document.getElementById('ordemValor1').value),
+                parseInt(document.getElementById('ordemValor2').value),
+                parseInt(document.getElementById('ordemValor3').value)
+            ];
+            valores.sort((a, b) => a - b);
+            document.getElementById('ordemResultado').innerText = `Valores Ordenados: ${valores.join(', ')}`;
+        }
+
+        function positivoNegativo() {
+            const x = parseInt(document.getElementById('valorPosNeg').value);
+            const resultado = x >= 0;
+            document.getElementById('positivoNegativoResultado').innerText = `É positivo? ${resultado}`;
+        }
+
+        function parImpar() {
+            const x = parseInt(document.getElementById('valorParImpar').value);
+            const resultado = x % 2 === 0;
+            document.getElementById('parImparResultado').innerText = `É par? ${resultado}`;
+        }
+    </script>
+</body>
+</html>
